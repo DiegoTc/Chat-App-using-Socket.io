@@ -27,6 +27,13 @@ pipeline {
                 }
             }
          }
+         stage('Build Image and upload') {
+             steps {
+                 sh './scripts/run_docker.sh'
+                 sh './scripts/upload_docker.sh'
+
+             }
+         }
 
          stage('Security Scan') {
               steps {

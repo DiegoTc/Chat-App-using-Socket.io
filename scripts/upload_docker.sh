@@ -6,6 +6,7 @@
 # Step 1:
 # Create dockerpath
 dockerpath=diegotc/chat-channel
+docker build --tag=diegotc/chat-channel .
 
 # Step 2:
 # Authenticate & tag

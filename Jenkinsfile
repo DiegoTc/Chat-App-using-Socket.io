@@ -1,4 +1,10 @@
 pipeline {
+
+     environment {
+          registry = "diegotc/chat-channel"
+          registryCredential = '826db27a-8ac9-41a9-83e8-0a920204a2f0'
+     }
+
      agent any
      stages {
          stage('Build') {
@@ -27,12 +33,30 @@ pipeline {
                 }
             }
          }
-         stage('Build Image and upload') {
-             steps {
-                 sh './scripts/upload_docker.sh'
 
-             }
+         stage('Building image') {
+            steps{
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
          }
+
+
+         stage('Deploy Image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                }
+            }
+         }
+
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
 
          stage('Security Scan') {
               steps {

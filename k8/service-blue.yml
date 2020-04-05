@@ -5,8 +5,6 @@ metadata:
   labels:
     app: chat-blue
 spec:
-  selector:
-    app: chat
   ports:
     - protocol: TCP
       port: 4000

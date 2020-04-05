@@ -64,7 +64,11 @@ pipeline {
          stage('Blue Deployment') {
              steps {
                 script{
-                    sh 'ansible-playbook -i inventory main-k8.yml -vvvv'
+                    def doesJavaRock = input(message: 'Do you like Java?', ok: 'Yes',
+                        parameters: [booleanParam(defaultValue: true,
+                        description: 'If you like Java, just push the button',name: 'Yes?')])
+
+                    echo "Java rocks?:" + doesJavaRock
                 }
 
              }

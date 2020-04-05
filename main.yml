@@ -1,3 +1,4 @@
+####Thanks to: https://github.com/geerlingguy/ansible-for-kubernetes/tree/master/cluster-aws-eks
 ---
 - hosts: localhost
   gather_facts: false

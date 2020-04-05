@@ -1,3 +1,4 @@
+###Thanks to: https://github.com/geerlingguy/ansible-for-kubernetes/tree/master/cluster-aws-eks
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'EKS Cluster definition.'

@@ -20,10 +20,3 @@
         state: present
         src: k8/service-blue.yml
         namespace: default
-
-    - name: Create a Green Deployment by reading the definition from a local file
-      k8s:
-        kubeconfig: ~/.kube/config
-        state: present
-        src: k8/deployment-green.yml
-        namespace: default

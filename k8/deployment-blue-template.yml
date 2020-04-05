@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: chat-blue
-        image: diegotc/chat-channel
+        image: diegotc/chat-channel:%BUILD_NUMBER%
         ports:
         - containerPort: 5000
 

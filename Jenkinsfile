@@ -61,6 +61,13 @@ pipeline {
             }
          }
 
+         stage('Update Correct images for blue deploying') {
+            steps{
+                sh "sed s/%BUILD_NUMBER%/$BUILD_NUMBER/g k8/deployment-blue-template.yml  > k8/deployment-blue.yml"
+                sh "cat k8/deployment-blue.yml"
+            }
+         }
+
          stage('Blue Deployment') {
              steps {
                 script{
@@ -75,6 +82,10 @@ pipeline {
                 message "Do you want to proceed for production deployment?"
             }
              steps {
+                script{
+                    sh "sed s/%BUILD_NUMBER%/$BUILD_NUMBER/g k8/deployment-green-template.yml  > k8/deployment-green.yml"
+                    sh "cat k8/deployment-green.yml"
+                }
                 script{
                     sh 'ansible-playbook -i inventory main-k8-green.yml -vvvv'
                 }

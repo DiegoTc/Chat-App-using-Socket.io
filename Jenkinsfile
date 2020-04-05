@@ -16,6 +16,7 @@ pipeline {
                  '''
              }
          }
+
          stage ("lint dockerfile") {
             agent {
                 docker {
@@ -53,16 +54,18 @@ pipeline {
             }
           }
 
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
-      }
-    }
 
-         stage('Security Scan') {
-              steps {
-                 aquaMicroscanner imageName: 'alpine:latest', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html'
-              }
+         stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
          }
+
+         stage('Testing kubectl') {
+             steps {
+                 sh 'kubectl get svc'
+             }
+         }
+
      }
 }

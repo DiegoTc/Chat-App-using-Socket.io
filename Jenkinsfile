@@ -64,11 +64,7 @@ pipeline {
          stage('Blue Deployment') {
              steps {
                 script{
-                    def doesJavaRock = input(message: 'Do you like Java?', ok: 'Yes',
-                        parameters: [booleanParam(defaultValue: true,
-                        description: 'If you like Java, just push the button',name: 'Yes?')])
-
-                    echo "Java rocks?:" + doesJavaRock
+                   sh 'ansible-playbook -i inventory main-k8-blue.yml -vvvv'
                 }
 
              }
@@ -79,17 +75,25 @@ pipeline {
             agent none
             steps {
                 script {
-                    sh ' input "Deploy to prod?"'
+                     def doesJavaRock = input(message: 'Do you like Java?', ok: 'Yes',
+                        parameters: [booleanParam(defaultValue: true,
+                        description: 'If you like Java, just push the button',name: 'Yes?')])
+
+                    echo "Java rocks?:" + doesJavaRock
                 }
             }
         }
 
+
+
          stage('Green Deployment') {
+            input{
+                message "Do you want to proceed for production deployment?"
+            }
              steps {
                 script{
                     sh 'ansible-playbook -i inventory main-k8-green.yml -vvvv'
                 }
-
              }
          }
 

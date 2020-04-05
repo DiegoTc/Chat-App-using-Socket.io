@@ -28,11 +28,6 @@ pipeline {
                 sh 'hadolint Dockerfile'
             }
 
-            post {
-                always {
-                    archiveArtifacts 'hadolint_lint.txt'
-                }
-            }
          }
 
           stage('Lint HTML') {

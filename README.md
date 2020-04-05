@@ -43,3 +43,4 @@ https://github.com/geerlingguy/ansible-for-kubernetes/tree/master/cluster-aws-ek
 The idea of using ansible and kubectl came thanks to this article: 
 https://www.magalix.com/blog/create-a-ci/cd-pipeline-with-kubernetes-and-jenkins
 
+File for replacing build number: https://learnk8s.io/templating-yaml-with-code

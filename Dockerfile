@@ -1,6 +1,5 @@
-FROM node
+FROM node:12.16.1-buster
 WORKDIR /app
-RUN cd /app
 COPY . /app
 RUN npm install
 EXPOSE 5000

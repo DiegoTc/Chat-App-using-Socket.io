@@ -48,9 +48,10 @@ pipeline {
                 script {
                     docker.withRegistry( '', registryCredential ) {
                     dockerImage.push()
+                    }
                 }
             }
-         }
+          }
 
     stage('Remove Unused docker image') {
       steps{

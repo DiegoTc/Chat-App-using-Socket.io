@@ -72,7 +72,7 @@ pipeline {
          stage('Blue Deployment') {
              steps {
                 script{
-                   sh 'ansible-playbook -i inventory main-k8-blue.yml -vvvv'
+                   sh 'ansible-playbook -i inventory main-k8-blue.yml'
                 }
 
              }
@@ -88,7 +88,7 @@ pipeline {
                     sh "cat k8/deployment-green.yml"
                 }
                 script{
-                    sh 'ansible-playbook -i inventory main-k8-green.yml -vvvv'
+                    sh 'ansible-playbook -i inventory main-k8-green.yml'
                 }
              }
          }

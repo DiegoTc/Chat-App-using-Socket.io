@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chat
+  name: chat-green
   labels:
-    app: chat
+    app: chat-green
 spec:
   selector:
     matchLabels:
-      app: chat
+      app: chat-green
   template:
     metadata:
       labels:
-        app: chat
+        app: chat-green
     spec:
       containers:
-      - name: chat
+      - name: chat-green
         image: diegotc/chat-channel
         ports:
         - containerPort: 5000

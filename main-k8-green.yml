@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Create a Service object by reading the definition from a file for green deployment
+      k8s:
+        kubeconfig: ~/.kube/config
+        state: present
+        src: k8/service-green.yml
+        namespace: default

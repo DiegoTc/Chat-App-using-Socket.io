@@ -61,11 +61,35 @@ pipeline {
             }
          }
 
-         stage('Testing kubectl') {
+         stage('Blue Deployment') {
              steps {
-                 sh 'ansible-playbook -i inventory main-k8.yml -vvvv'
+                script{
+                    sh 'ansible-playbook -i inventory main-k8.yml -vvvv'
+                }
+
              }
          }
+
+         stage('Approval') {
+            // no agent, so executors are not used up when waiting for approvals
+            agent none
+            steps {
+                script {
+                    sh ' input "Deploy to prod?"'
+                }
+            }
+        }
+
+         stage('Green Deployment') {
+             steps {
+                script{
+                    sh 'ansible-playbook -i inventory main-k8-green.yml -vvvv'
+                }
+
+             }
+         }
+
+
 
      }
 }

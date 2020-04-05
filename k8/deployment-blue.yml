@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-blue
+  labels:
+    app: chat-blue
+spec:
+  selector:
+    matchLabels:
+      app: chat-blue
+  template:
+    metadata:
+      labels:
+        app: chat-blue
+    spec:
+      containers:
+      - name: chat-blue
+        image: diegotc/chat-channel
+        ports:
+        - containerPort: 5000
+

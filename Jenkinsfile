@@ -70,22 +70,6 @@ pipeline {
              }
          }
 
-         stage('Approval') {
-            // no agent, so executors are not used up when waiting for approvals
-            agent none
-            steps {
-                script {
-                     def doesJavaRock = input(message: 'Do you like Java?', ok: 'Yes',
-                        parameters: [booleanParam(defaultValue: true,
-                        description: 'If you like Java, just push the button',name: 'Yes?')])
-
-                    echo "Java rocks?:" + doesJavaRock
-                }
-            }
-        }
-
-
-
          stage('Green Deployment') {
             input{
                 message "Do you want to proceed for production deployment?"

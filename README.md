@@ -37,8 +37,13 @@ Take a screenshot of the Jenkins pipeline showing deployment and a screenshot of
 Found this article that guides you how to begin this project: https://medium.com/@andresaaap/capstone-cloud-devops-nanodegree-4493ab439d48
 
 For managing cloudformation and ansible I found this repo which is basically what 
-I used for my code
+I used for my code infrastructure. 
 https://github.com/geerlingguy/ansible-for-kubernetes/tree/master/cluster-aws-eks
+
+For running the infraestructure you will need this command
+```
+ansible-playbook -i inventory main.yml
+```
 
 The idea of using ansible and kubectl came thanks to this article: 
 https://www.magalix.com/blog/create-a-ci/cd-pipeline-with-kubernetes-and-jenkins

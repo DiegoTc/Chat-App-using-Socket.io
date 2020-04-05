@@ -63,7 +63,7 @@ pipeline {
 
          stage('Testing kubectl') {
              steps {
-                 sh 'kubectl get svc'
+                 sh 'ansible-playbook -i inventory main-k8.yml -vvvv'
              }
          }
 

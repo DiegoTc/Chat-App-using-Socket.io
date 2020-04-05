@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Create a Deployment by reading the definition from a local file
+      k8s:
+        kubeconfig: ~/.kube/config
+        state: present
+        src: k8/deployment.yml
+        namespace: default
+
+    - name: Create a Service object by reading the definition from a file
+      k8s:
+        kubeconfig: ~/.kube/config
+        state: present
+        src: k8/service.yml
+        namespace: default

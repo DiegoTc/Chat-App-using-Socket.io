@@ -3,8 +3,117 @@ A simple chat app using socket.io
 See it in action - [Kunal Chat App](https://kunal-chat-app.herokuapp.com)
 The application code is of abkunal: https://github.com/abkunal/Chat-App-using-Socket.io
 
+## What does this project does?
+This is a chat application developed by [Kunal Yadav](https://github.com/abkunal) 
+You can interact with another person just providing a url, simple as that. 
+
+## What's the difference of this project? Why a fork?
+This is part of the capstone project for Udacity Cloud DevOps Nano Degree Program.
+The plus that it has this project you will be able to run it using:
+* NPM
+* Docker
+* Kubernetes
+    * EKS
+
+## How do I run it?
+### Running in NPM
+```
+npm install
+npm start
+```
+
+This will generate the a similar message:
+```
+> chatapp@1.0.0 start /home/diego/Documents/Proyectos/Udacity/capstone/Chat-App-using-Socket.io
+> node app.js
+
+listening on port:  5000
+```
+
+Now you can go to http://localhost:5000/
+
+### Running in Docker
+For this step it assumes you had docker installed in your workstation.
+If you don't have it, please use this [link](https://docs.docker.com/install/)
+
+For creating the image and running the container, we have a script
+that helps us with this located at: `scripts/run_docker.sh`
+
+```
+./scripts/run_docker.sh
+```
+
+When the script finishes, you will find  in the logs something like this:
+```
+listening on port:  5000
+A user connected!
+```
+Now you can go to http://localhost:5000/
+
+
+### Kubernetes / AWS EKS
+
+**Prerequisites**
+Please be sure to have installed the following, or you will have troubles:
+* aws cli
+* kubectl
+
+For configuring aws cli, please follow Amazon's Documentation: https://docs.aws.amazon.com/eks/latest/userguide/getting-started-console.html
+
+Create the infrastructure in AWS
+
+`ansible-playbook -i inventory main.yml`
+
+Configure aws EKS
+
+`aws eks --region us-east-1 update-kubeconfig --name eks-example`
+
+If you're planning to run this locally and deploy it to your EKS cluster.
+You will need to modify the deployment-green-template.yml
+
+You will need to replace the `image: diegotc/chat-channel:%BUILD_NUMBER%`
+with the correct name and version
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-blue
+  labels:
+    app: chat-blue
+spec:
+  selector:
+    matchLabels:
+      app: chat-blue
+  template:
+    metadata:
+      labels:
+        app: chat-blue
+    spec:
+      containers:
+      - name: chat-blue
+        image: diegotc/chat-channel:%BUILD_NUMBER%
+        ports:
+        - containerPort: 5000
+
+
+```
+
+Run the commands for deploying and exposing the service
+```
+kubectl apply -f k8/deployment-green-template.yml 
+kubectl apply -f k8/service-green.yml
+```
+
+Find the IP for testing
+```
+kubectl get services
+```
+
+Search for the external EXTERNAL-IP
+
 **This is part of the capstone project for the Udacity Cloud DevOps Nanodegree**
 
+## Capstone Project Requirements
 ```
 Steps in Completing Your Project
 Step 1: Propose and Scope the Project

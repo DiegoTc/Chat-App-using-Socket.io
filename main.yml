@@ -4,7 +4,7 @@
   gather_facts: false
 
   vars_files:
-    - vars/main-k8-blue.yml
+    - vars/main.yml
 
   tasks:
     - name: Ensure VPC exists via CloudFormation.
